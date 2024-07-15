@@ -39,3 +39,19 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Create components
+
+```bash
+ng g component folder/name-file
+```
+
+`g` is the abbreviation of `generate`.
+
+For example, to create a home component:
+
+```bash
+ng g c pages/home
+```
+
+With `c` being the abbreviation of `component` and `pages/home` the path where the component will be created.
