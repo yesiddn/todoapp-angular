@@ -18,6 +18,12 @@ export class LabsComponent {
   ];
   name = 'Yesid';
   age = 19;
+  img = 'https://w3schools.com/howto/img_avatar.png';
+  person = {
+    name: 'Yesid',
+    age: 19,
+    avatar: 'https://w3schools.com/howto/img_avatar.png',
+  };
 
   // de esta forma las variables solo pueden ser accedidas desde la clase
   private email = 'my.mail@mail.com';

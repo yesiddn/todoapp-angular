@@ -11,3 +11,11 @@
 <h2>{{ "Hola ".repeat(4) }}</h2>
 <p>La suma de 3 + 3 es {{ 3 + 3 }}</p>
 <p>Hola, soy {{ name }} y mi edad es {{ age }}</p>
+<hr />
+
+<!-- Property binding: -->
+<!-- Se usa para enlazar propiedades de un elemento html con una propiedad (atributo) de la clase -->
+<img [src]="img" alt="A W3School image">
+<input type="number" [value]="person.age">
+<button [disabled]="age < 18 ? true : false">Click me</button>
+<p>Person: {{ person.name }}</p>

@@ -68,3 +68,16 @@ Con el flag --dry-run te ejecuta el comando pero no crea el componente. Es útil
 Puedes tener condiciones, como `{{ isDisabled ? 'Verdadero' : 'Falso' }}`
 Ejecutar funciones, como `{{ saludar() }}`
 Acceder a propiedades de objetos `{{ person.name }}`
+
+## Property binding
+
+Property binding es una forma de enlazar propiedades de un elemento HTML con propiedades de una clase de TypeScript. Se hace con corchetes `[]`.
+
+Es la manera que dispone Angular para controlar y modificar las propiedades de los distintos elementos de HTML. Para esto, simplemente utiliza los corchetes [] para poder modificar dinámicamente ese atributo desde el controlador.
+
+### Utilidades
+
+- El atributo src de la etiqueta `<img>` para modificar dinámicamente una imagen.
+- El atributo href de un `<a>` para modificar un enlace.
+- El atributo value de un `<input>` para autocompletar un valor de un formulario.
+- El atributo disable de un `<input>` para habilitar/deshabilitar un campo de un formulario.
