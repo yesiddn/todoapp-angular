@@ -6,6 +6,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## Errors
+
+### *ngFor directive not working
+
+Si creaste el proyecto con angular y al momento de usar `*ngFor` no te lo reconoce, esta es la solución.
+
+Sucede que en casos el proyecto se crea sin algunas importaciones como el de "CommonModule", solo agregar a tu archivo app.component.ts en la parte superior de los imports:
+
+`import { CommonModule } from '@angular/common';`
+
+Y en la seccion de decorador del `@Component`:
+
+`imports : [RouterOutlet, CommonModule];`
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
