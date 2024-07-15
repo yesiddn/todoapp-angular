@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common'
 
 @Component({
@@ -24,6 +24,7 @@ export class LabsComponent {
     age: 19,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
   };
+  country = signal('Colombia');
 
   clickHandler() {
     alert('Hola!');
@@ -31,6 +32,17 @@ export class LabsComponent {
 
   changeHandler(event: Event) { // hay algunos eventos que pasan argumentos a las funciones
     console.log(event);
+  }
+
+  keydownHandler(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
+    console.log(input.value);
+  }
+
+  changeCountry(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newCountry = input.value;
+    this.country.set(newCountry); // esta es la mejor forma de cambiar el valor de una señal
   }
 
   // de esta forma las variables solo pueden ser accedidas desde la clase
