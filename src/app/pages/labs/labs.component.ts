@@ -11,11 +11,16 @@ import { CommonModule } from '@angular/common'
 export class LabsComponent {
   // typescript define estas variables como publicas por defecto y pueden ser accedidas desde el template (labs.component.html)
   welcome = 'Hola!';
-  tasks = [
+  tasksOne = [
     'Instalar Angular CLI',
     'Crear nuevo proyecto',
     'Crear componentes',
   ];
+  tasks = signal([
+    'Instalar Angular CLI',
+    'Crear nuevo proyecto',
+    'Crear componentes',
+  ]);
   name = 'Yesid';
   age = 19;
   img = 'https://w3schools.com/howto/img_avatar.png';
