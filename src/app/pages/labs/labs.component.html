@@ -15,7 +15,16 @@
 
 <!-- Property binding: -->
 <!-- Se usa para enlazar propiedades de un elemento html con una propiedad (atributo) de la clase -->
-<img [src]="img" alt="A W3School image">
-<input type="number" [value]="person.age">
+<img [src]="img" alt="A W3School image" />
+<input type="number" [value]="person.age" />
 <button [disabled]="age < 18 ? true : false">Click me</button>
 <p>Person: {{ person.name }}</p>
+<hr />
+
+<!-- Event binding: -->
+<!-- Permite controlar los eventos que suceden en estos elementos. Por ejemplo, el clic de un botón, detectar cambios en un campo. -->
+<button (click)="clickHandler()">Click me, again</button>
+<button (dblclick)="clickHandler()">Click me two times</button>
+<label for="change">Change</label>
+<!-- para capturar el evento se debe usar la sintaxis de signo de dolar y nombre del evento => $event -->
+<input id="change" type="number" [value]="person.age" (change)="changeHandler($event)" />

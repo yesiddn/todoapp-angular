@@ -81,3 +81,27 @@ Es la manera que dispone Angular para controlar y modificar las propiedades de l
 - El atributo href de un `<a>` para modificar un enlace.
 - El atributo value de un `<input>` para autocompletar un valor de un formulario.
 - El atributo disable de un `<input>` para habilitar/deshabilitar un campo de un formulario.
+
+## Event binding
+
+Event binding te permite escuchar y responder las acciones del usuario, como pulsaciones de teclas, movimientos del ratón, clics y toques. Permite controlar los eventos que suceden en estos elementos. Por ejemplo, el clic de un botón, detectar cambios en un campo, el envío de un formulario, entre otros eventos. Para esto utiliza los paréntesis () para el bindeo de la propiedad del elemento.
+
+- click: Se activa cuando se hace clic en un elemento. Por ejemplo: `<button (click)="onSave()">Guardar</button>`
+- dblclick: Se activa cuando se hace doble clic en un elemento. Por ejemplo: `<div (dblclick)="onDoubleClick()">Haz doble clic aquí</div>`
+- input: Se activa cuando se introduce texto en un campo de entrada (como un input o textarea). Útil para detectar cambios en el contenido. `<input (input)="onInput($event.target.value)" />`
+- change: Se activa cuando cambia el valor de un elemento de entrada (por ejemplo, un select).
+
+```html
+<select (change)="onSelectionChange($event.target.value)">
+  <option value="option1">Opción 1</option>
+  <option value="option2">Opción 2</option>
+</select>
+```
+
+- keydown: Se activa cuando se presiona una tecla. Puedes especificar la tecla o el código que deseas enlazar. Por ejemplo: `<input (keydown.enter)="onKeydown($event)" />`
+- keyup: Similar a keydown, pero se activa cuando se suelta una tecla.
+- mouseover: Se activa cuando el puntero del ratón entra en un elemento.
+- mouseout: Similar a mouseover, pero se activa cuando el puntero del ratón sale de un elemento.
+- mouseleave: Se activa cuando el puntero del ratón sale de un elemento. Similar a mouseout, pero no se propaga a los elementos secundarios. `<div (mouseleave)="onMouseLeave()">El ratón se fue</div>`
+- focus: Se activa cuando un elemento obtiene el foco.
+- blur: Similar a `focus`, pero se activa cuando un elemento pierde el foco.

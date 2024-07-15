@@ -25,6 +25,14 @@ export class LabsComponent {
     avatar: 'https://w3schools.com/howto/img_avatar.png',
   };
 
+  clickHandler() {
+    alert('Hola!');
+  }
+
+  changeHandler(event: Event) { // hay algunos eventos que pasan argumentos a las funciones
+    console.log(event);
+  }
+
   // de esta forma las variables solo pueden ser accedidas desde la clase
   private email = 'my.mail@mail.com';
 }
