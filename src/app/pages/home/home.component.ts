@@ -14,4 +14,14 @@ export class HomeComponent {
     'Crear nuevo proyecto',
     'Crear componentes',
   ]);
+
+  changeHandler(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newTask = input.value;
+    this.tasks.update((tasks) => [...tasks, newTask]); // de esta forma se actualiza el valor de una señal -> update nos da como argumento el valor actual de la señal para que podamos modificarlo -> viene del patron No Mutar, Solo Crear Nuevos Estados
+  }
+
+  deleteTask(index: number) {
+    this.tasks.update((tasks) => tasks.filter((task, position) => position !== index));
+  }
 }
