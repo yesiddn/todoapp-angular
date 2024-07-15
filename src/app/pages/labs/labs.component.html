@@ -29,6 +29,12 @@
   <label for="change">Change</label>
   <!-- para capturar el evento se debe usar la sintaxis de signo de dolar y nombre del evento => $event -->
   <input id="change" type="number" [value]="person.age" (change)="changeHandler($event)" />
+
+  <!-- Keyboard events -->
+  <label for="keydown">Keydown</label>
+  <input id="keydown" type="text" (keydown)="keydownHandler($event)" />
+  <label for="keydown">Keydown shotcuts shift + t for a specific key</label>
+  <input id="keydown" type="text" (keydown.shift.t)="clickHandler()" />
   <hr>
 
   <!-- Signals -->

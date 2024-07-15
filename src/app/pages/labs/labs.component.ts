@@ -35,7 +35,7 @@ export class LabsComponent {
   }
 
   keydownHandler(event: KeyboardEvent) {
-    const input = event.target as HTMLInputElement;
+    const input = event.target as HTMLInputElement; // se puede hacer un casting para acceder a las propiedades del elemento
     console.log(input.value);
   }
 
