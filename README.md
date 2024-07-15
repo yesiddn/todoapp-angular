@@ -61,3 +61,10 @@ ng g c components/form --dry-run
 ```
 
 Con el flag --dry-run te ejecuta el comando pero no crea el componente. Es útil cuando quieres verificar que la ruta donde se va a crear el componente sea correcta
+
+## String interpolation
+
+¿Qué puedes hacer con String Interpolation?
+Puedes tener condiciones, como `{{ isDisabled ? 'Verdadero' : 'Falso' }}`
+Ejecutar funciones, como `{{ saludar() }}`
+Acceder a propiedades de objetos `{{ person.name }}`
