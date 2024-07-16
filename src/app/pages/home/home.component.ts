@@ -87,4 +87,26 @@ export class HomeComponent {
       )
     );
   }
+
+  updateEditingTaskMode(index: number) {
+    // si la tarea ya está completada, no se puede editar
+    if (this.tasks()[index].completed) return;
+
+    this.tasks.update((tasks) =>
+      tasks.map((task, position) =>
+        position === index ? { ...task, editing: true } : { ...task, editing: false }
+      )
+    );
+  }
+
+  updateTaskTitle(event: Event, index: number) {
+    const input = event.target as HTMLInputElement;
+    const newTitle = input.value;
+
+    this.tasks.update((tasks) =>
+      tasks.map((task, position) =>
+        position === index ? { ...task, title: newTitle, editing: false } : task
+      )
+    );
+  }
 }

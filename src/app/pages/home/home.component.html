@@ -7,26 +7,31 @@
       <!-- <input class="new-todo" placeholder="Type new todo" autofocus type="text" (change)="changeHandler($event)" /> -->
 
       <!-- Usando form control para capturar el valor del input que es una forma mas avanzada -->
-      <input class="new-todo" placeholder="Type new todo" autofocus type="text" [formControl]="newTaskCtrl" (keydown.enter)="changeHandler($event)" />
+      <input class="new-todo" placeholder="Type new todo" autofocus type="text" [formControl]="newTaskCtrl"
+        (keydown.enter)="changeHandler($event)" />
     </div>
   </header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
     <!-- <pre>
       <code> -->
-        <!-- se usa un pipe para mostrar el contenido de la variable tasks -->
-        <!-- {{ tasks() | json }}
+    <!-- se usa un pipe para mostrar el contenido de la variable tasks -->
+    <!-- {{ tasks() | json }}
       </code>
     </pre> -->
     <section class="main">
       <ul class="todo-list">
-        <li *ngFor="let task of tasks(); index as i" [class.completed]="task.completed">
+        <li
+        *ngFor="let task of tasks(); index as i"
+        [class.editing]="task.editing"
+        [class.completed]="task.completed"
+        (dblclick)="updateEditingTaskMode(i)">
           <div class="view">
             <input class="toggle" type="checkbox" [checked]="task.completed" (change)="updateTask(i)" />
             <label>{{ task.title }}</label>
             <button class="destroy" (click)="deleteTask(i)"></button>
           </div>
-          <input class="edit" value="Buy a unicorn" />
+          <input class="edit" (keydown.enter)="updateTaskTitle($event, i)" [value]="task.title" />
         </li>
         <!-- <li class="completed">
           <div class="view">
