@@ -3,7 +3,11 @@
     <div class="container">
       <h1>My Day</h1>
       <p>All my tasks in one place</p>
-      <input class="new-todo" placeholder="Type new todo" autofocus type="text" (change)="changeHandler($event)" />
+      <!-- Usando signal binding para capturar el valor del input -->
+      <!-- <input class="new-todo" placeholder="Type new todo" autofocus type="text" (change)="changeHandler($event)" /> -->
+
+      <!-- Usando form control para capturar el valor del input que es una forma mas avanzada -->
+      <input class="new-todo" placeholder="Type new todo" autofocus type="text" [formControl]="newTaskCtrl" (keydown.enter)="changeHandler($event)" />
     </div>
   </header>
   <div class="container todoapp-wrapper">
