@@ -30,6 +30,11 @@ export class LabsComponent {
     avatar: 'https://w3schools.com/howto/img_avatar.png',
   };
   country = signal('Colombia');
+  anotherPerson = signal({
+    name: 'Juan',
+    age: 21,
+    avatar: 'https://w3schools.com/howto/img_avatar.png',
+  });
 
   clickHandler() {
     alert('Hola!');
@@ -48,6 +53,12 @@ export class LabsComponent {
     const input = event.target as HTMLInputElement;
     const newCountry = input.value;
     this.country.set(newCountry); // esta es la mejor forma de cambiar el valor de una señal
+  }
+
+  changeAge(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newAge = input.value;
+    this.anotherPerson.update((prevState) => ({ ...prevState, age: parseInt(newAge) }));
   }
 
   // de esta forma las variables solo pueden ser accedidas desde la clase

@@ -43,11 +43,33 @@
   <input type="text" [value]="country()" (change)="changeCountry($event)" />
 
   <!--  -->
-  <h2>Directivas de control</h2>
+  <!-- <h2>Directivas de control</h2> -->
   <ul>
     <p>Total: {{ tasks().length }}</p>
     <li *ngFor="let task of tasks(); index as i">
       {{ i }} {{ task }}
     </li>
   </ul>
+  <hr />
+
+  <h2>Uso de ngIf</h2>
+  <p>Si x condicion se cumple, se renderiza el contenido</p>
+  <div *ngIf="1 === 1">
+    <p>My content</p>
+  </div>
+
+  <div *ngIf="country() === 'Colombia'">
+    <p>Other content: My country is {{ country() }}</p>
+  </div>
+
+  <div>
+    <p>Cambiar la edad de {{ anotherPerson().name }} a 18 para mostrar otro mensajes</p>
+    <input type="number" [value]="anotherPerson().age" (change)="changeAge($event)" />
+  </div>
+  <div *ngIf="anotherPerson().name === 'Juan' && anotherPerson().age === 18; else elseBlock"> <!-- else elseBlock es una referencia a un template cuando la condicion no se cumple -> elseBlock puede tener cualquiel nombre como myBlock -->
+    <p>Soy {{ anotherPerson().name }} y acabo de cumplir 18 años</p>
+  </div>
+  <ng-template #elseBlock> <!-- se define el template con el nombre de la referencia -->
+    <p>Soy {{ anotherPerson().name }} y tengo {{ anotherPerson().age }} años</p>
+  </ng-template>
 </main>
