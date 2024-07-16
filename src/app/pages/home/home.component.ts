@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -32,6 +32,23 @@ export class HomeComponent {
     // 'Crear nuevo proyecto',
     // 'Crear componentes',
   ]);
+
+  // composite state o computed signals => es un estado que viene de la combinación de otros estados
+  filter = signal<'all' | 'pending' | 'completed'>('all'); // entre los signos de menor y mayor se pone el tipo de dato que va a tener el estado, podria se string para que pueda tener cualquier valor o de esta forma para que solo pueda tener uno de los tres valores que se le pasan
+  tasksByFilter = computed(() => {
+    const filter = this.filter();
+    const tasks = this.tasks();
+
+    if (filter === 'pending') {
+      return tasks.filter((task) => !task.completed);
+    }
+
+    if (filter === 'completed') {
+      return tasks.filter((task) => task.completed);
+    }
+
+    return tasks;
+  }); // de esta forma se crea un estado que depende de otros estados y cuando alguno de estos estados cambia (en este caso filter o tasks), se vuelve a ejecutar la función que se pasa como argumento a computed
 
   newTaskCtrl = new FormControl(
     '',
@@ -75,7 +92,7 @@ export class HomeComponent {
 
   deleteTask(index: number) {
     this.tasks.update((tasks) =>
-      tasks.filter((task, position) => position !== index)
+      tasks.filter((task) => task.id !== index)
     );
   }
 
@@ -108,5 +125,9 @@ export class HomeComponent {
         position === index ? { ...task, title: newTitle, editing: false } : task
       )
     );
+  }
+
+  changeFilter(filter: 'all' | 'pending' | 'completed') {
+    this.filter.set(filter);
   }
 }
