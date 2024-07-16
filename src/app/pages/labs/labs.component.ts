@@ -39,6 +39,9 @@ export class LabsComponent {
 
   // formularios reactivos -> tiene una abstraccion de los signales
   colorCtrl = new FormControl();
+  widthCtrl = new FormControl(50, {
+    nonNullable: true,
+  });
 
   // tambien se puede acceder a los valores de los signales desde aqui
   constructor() {
