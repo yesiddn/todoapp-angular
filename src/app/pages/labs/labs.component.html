@@ -72,4 +72,18 @@
   <ng-template #elseBlock> <!-- se define el template con el nombre de la referencia -->
     <p>Soy {{ anotherPerson().name }} y tengo {{ anotherPerson().age }} años</p>
   </ng-template>
+  <hr>
+
+  <h2>Uso de ngSwitch</h2>
+  <input type="text" [value]="anotherPerson().name" (change)="changeName($event)" />
+  <div [ngSwitch]="anotherPerson().name">
+    <p *ngSwitchCase="'Carlos'">Yo soy Carlos. Valor quemado</p>
+    <p *ngSwitchCase="'Pedro'">Yo soy Pedro. Valor quemado</p>
+    <p *ngSwitchCase="'Maria'">Yo soy Maria. Valor quemado</p>
+    <p *ngSwitchCase="'Tatiana'">Yo soy Tatiana. Valor quemado</p>
+    <p *ngSwitchCase="'Juan'">Yo soy {{ anotherPerson().name }}, una persona normal. Valor con string interpolation</p>
+
+    <!-- cuando no se cumple ninguna de las condiciones -->
+    <p *ngSwitchDefault>Yo soy una persona desconocida</p>
+  </div>
 </main>

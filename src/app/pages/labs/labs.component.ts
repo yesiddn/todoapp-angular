@@ -61,6 +61,12 @@ export class LabsComponent {
     this.anotherPerson.update((prevState) => ({ ...prevState, age: parseInt(newAge) }));
   }
 
+  changeName(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newName = input.value;
+    this.anotherPerson.update((prevState) => ({ ...prevState, name: newName }));
+  }
+
   // de esta forma las variables solo pueden ser accedidas desde la clase
   private email = 'my.mail@mail.com';
 }
