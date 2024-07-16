@@ -86,4 +86,9 @@
     <!-- cuando no se cumple ninguna de las condiciones -->
     <p *ngSwitchDefault>Yo soy una persona desconocida</p>
   </div>
+  <hr>
+
+  <!-- esto nos ahorra tener que manejar el evento de cambio en el input u otros eventos, validaciones y validaciones asincronas como un fetch para validar si un correo existe -->
+  <input type="color" [formControl]="colorCtrl">
+  <p>Color: {{ colorCtrl.value }}</p>
 </main>

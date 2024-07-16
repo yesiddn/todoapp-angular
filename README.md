@@ -115,3 +115,73 @@ Angular Signals es un sistema que rastrea de forma granular cómo y dónde se us
 El valor de una signal se lee llamando a su función getter, que permite a Angular rastrear dónde se utiliza la signal.
 
 Las signals pueden ser de escritura o de sólo lectura.
+
+### Reactive forms
+
+Los formularios reactivos son una forma de construir formularios en Angular utilizando programación reactiva.
+
+Se importan los módulos `ReactiveFormsModule` y `FormsModule`.
+
+```typescript
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+```
+
+Usando `FormControl` se puede crear un control de formulario para un input.
+
+```typescript
+export class LabsComponent {
+  colorCtrl = new FormControl();
+}
+```
+
+```html
+<input type="color" [formControl]="colorCtrl">
+```
+
+En el HTML se puede usar el valor del input asi:
+
+```html
+<p>Color: {{ colorCtrl.value }}</p>
+```
+
+Para acceder al valor desde la clase se puede hacer asi:
+
+```typescript
+export class LabsComponent {
+  colorCtrl = new FormControl();
+
+  constructor() {
+    this.colorCtrl.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
+  }
+}
+```
+
+Siempre que se haya creado una subscripción a un formulario, hay que asegurarnos de destruir la subscripción cuando ya no se necesite; evitar memory leaks.
+
+Fácilmente se podría guardar esa sub en una variabel de tipo Subscription. Y cuando se ejecute el ciclo de vida onDestroy, ejecutar una desuscripción
+
+```typescript
+export class LabsComponent implements OnDestroy {
+  form = new FormControl();
+
+  sub: Subscription | null = null;
+
+  ngOnDestroy(): void {
+    if (this.sub !== null) {
+      this.sub.unsubscribe();
+    }
+  }
+
+  constructor() {
+    this.handleFormSubscription();
+  }
+
+  handleFormSubscription() {
+    this.sub = this.form.valueChanges.subscribe(x => console.log(x))
+  }
+
+  name = signal('Daniel');
+}
+```
