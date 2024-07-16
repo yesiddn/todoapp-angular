@@ -104,4 +104,14 @@
   <input type="number" id="width" [formControl]="widthCtrl">
   <!-- style.property.unit -->
   <span class="box" [style.width.px]="widthCtrl.value"></span>
+  <hr>
+
+  <h2>Clases de HTML con Angular</h2>
+  <label for="className">Ingrese su nombre: </label>
+  <input type="text" id="className" [formControl]="nameCtrl">
+  <!-- se verifica si el input es invalido y el usuario ha comenzado a interactuar con el para mostrar el mensaje de error -> ES MALA FORMA DE HACERLO CON NGIF PORQUE ESTO MUEVE LOS ELEMENTOS AL APARECER CUANDO HAY UN ERROR -->
+  <!-- <span class="message-error" *ngIf="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span> -->
+
+  <!-- para activar una clase se usa [class.nombre-de-clase-para-activar] -->
+  <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
 </main>
