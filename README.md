@@ -339,3 +339,11 @@ firebase deploy
 
 Fibase nos dará una URL donde se encuentra la aplicación:
 [mydayapp](https://mydayapp-f0e88.web.app)
+
+## Migration to new syntax
+
+```bash
+ng g @angular/core:control-flow
+```
+
+Al correr el comando preguntará si se quiere migrar todo el proyecto o una carpeta en específico.
