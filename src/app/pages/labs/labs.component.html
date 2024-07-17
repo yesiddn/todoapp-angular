@@ -114,4 +114,22 @@
 
   <!-- para activar una clase se usa [class.nombre-de-clase-para-activar] -->
   <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
+  <hr>
+
+  <h2>Nueva sintaxis: if else</h2>
+  <div>
+    <p>Cambiar la edad de {{ anotherPerson().name }} a 18 para mostrar otro mensajes</p>
+    <input type="number" [value]="anotherPerson().age" (change)="changeAge($event)" />
+  </div>
+
+  <!-- if else -->
+  @if (anotherPerson().name === 'Juan' && anotherPerson().age === 18) {
+    <div>
+      <p>Soy {{ anotherPerson().name }} y acabo de cumplir 18 años</p>
+    </div>
+  } @else {
+    <div>
+      <p>Soy {{ anotherPerson().name }} y tengo {{ anotherPerson().age }} años</p>
+    </div>
+  }
 </main>
