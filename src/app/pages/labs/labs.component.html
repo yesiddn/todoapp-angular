@@ -132,4 +132,49 @@
       <p>Soy {{ anotherPerson().name }} y tengo {{ anotherPerson().age }} años</p>
     </div>
   }
+
+  <h2>Nueva sintaxis: for</h2>
+  <ul>
+    <p>Total: {{ tasks().length }}</p>
+    <!-- el for nos pide un track para representar un elemento unico de la lista, si tuvieramos un task.id podriamos usar track task.id, en este caso tenemos un array de strings por lo que su identificador podria ser task, pero tambien se puede usar su indice track $index -->
+    <!-- En el tercer argumento tambien podemos obtener el indice -->
+    @for (task of tasks(); track task; let i = $index) {
+      <li>
+        {{ i }} {{ task }}
+      </li>
+    } @empty {
+      <li><strong>No hay tareas</strong></li>
+    } <!-- con @empty podemos decir identificar si la lista que estamos recorrienda esta vaica -->
+  </ul>
+
+  <h2>Nueva sintaxis: switch</h2>
+  <input type="text" [value]="anotherPerson().name" (change)="changeName($event)" />
+  <div>
+    @switch (anotherPerson().name) {
+      @case ('Carlos') {
+        <p>Yo soy Carlos. Valor quemado</p>
+      }
+
+      @case ('Pedro') {
+        <p>Yo soy Pedro. Valor quemado</p>
+      }
+
+      @case ('Maria') {
+        <p>Yo soy Maria. Valor quemado</p>
+      }
+
+      @case ('Tatiana') {
+        <p>Yo soy Tatiana. Valor quemado</p>
+      }
+
+      @case ('Juan') {
+        <p>Yo soy {{ anotherPerson().name }}, una persona normal. Valor con string interpolation</p>
+      }
+
+      <!-- cuando no se cumple ninguna de las condiciones -->
+      @default {
+        <p>Yo soy una persona desconocida</p>
+      }
+    }
+  </div>
 </main>
