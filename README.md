@@ -254,3 +254,88 @@ Cambiar de nombre la propiedad `"architect.builder.options.browser"` por `"archi
 ![Comparativa](https://static.platzi.com/media/user_upload/image-1f86dc4b-5e9a-446c-abb7-da147429764d.jpg)
 
 > 💡Pd: la propiedad deleteOutputPath es opcional.
+
+## Deploy in Firebase
+
+Para hacer deploy de la aplicación en Firebase, primero se debe ingresar a la [consola de Firebase](https://console.firebase.google.com/?hl=es&pli=1) y crear un nuevo proyecto.
+
+Luego, al ingresar al proyecto, se debe ir a la sección `Build` y seleccionar la opción `Hosting`.
+Nos pedirá instalar Firebase CLI, para eso se debe ejecutar el siguiente comando:
+
+```bash
+npm install -g firebase-tools
+```
+
+Luego de instalar Firebase CLI, se debe ejecutar el siguiente comando para iniciar sesión en Firebase:
+
+```bash
+firebase login
+```
+
+Y otro comando para inicializar el proyecto:
+
+```bash
+firebase init
+```
+
+Nos pedirá seleccionar las opciones que queremos, en este caso seleccionaremos `Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys`.
+
+```bash
+ ( ) Firestore: Configure security rules and indexes files for Firestore
+ ( ) Functions: Configure a Cloud Functions directory and its files
+>( ) Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys
+ ( ) Hosting: Set up GitHub Action deploys
+ ( ) Storage: Configure a security rules file for Cloud Storage
+ ( ) Emulators: Set up local emulators for Firebase products
+ ( ) Remote Config: Configure a template file for Remote Config
+```
+
+Pasaremos a seleccionar que tenemos un proyecto existente.
+
+```bash
+? Please select an option: (Use arrow keys)
+> Use an existing project
+  Create a new project
+  Add Firebase to an existing Google Cloud Platform project
+  Don't set up a default project
+```
+
+Seleccionaremos el proyecto que creamos en la consola de Firebase y dependerá de los proyectos que tengamos en Firebase.
+
+```bash
+? Select a default Firebase project for this directory: (Use arrow keys)
+> mydayapp-codigo (mydayapp)
+```
+
+Luego seleccionaremos la carpeta donde se encuentra el build del proyecto de Angular.
+
+```bash
+? What do you want to use as your public directory? (public) dist/todoapp
+```
+
+Como es una single-page application, seleccionaremos `Yes`.
+
+```bash
+? Configure as a single-page app (rewrite all urls to /index.html)? (y/N) y
+```
+
+No queremos una configuración de GitHub, por lo que seleccionaremos `No`.
+
+```bash
+? Set up automatic builds and deploys with GitHub? (y/N) N
+```
+
+Y tampoco queremos sobrescribir el archivo `index.html` porque Angular ya lo genera.
+
+```bash
+? File dist/todoapp/index.html already exists. Overwrite? N
+```
+
+Como último paso haremos el deploy de la aplicación.
+
+```bash
+firebase deploy
+```
+
+Fibase nos dará una URL donde se encuentra la aplicación:
+[mydayapp](https://mydayapp-f0e88.web.app)
