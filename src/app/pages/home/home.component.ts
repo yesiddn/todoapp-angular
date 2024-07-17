@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, inject, Injector, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,21 +13,21 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 export class HomeComponent {
   // con la interface Task hacemos que tasks sea un array de objetos con las propiedades id, title y completed. En caso de que no se cumpla la interface, TypeScript nos mostrará un error
   tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Instalar Angular CLI',
-      completed: false,
-    },
-    {
-      id: Date.now() + 1,
-      title: 'Crear nuevo proyecto',
-      completed: false,
-    },
-    {
-      id: Date.now() + 2,
-      title: 'Crear componentes',
-      completed: false,
-    },
+    // {
+    //   id: Date.now(),
+    //   title: 'Instalar Angular CLI',
+    //   completed: false,
+    // },
+    // {
+    //   id: Date.now() + 1,
+    //   title: 'Crear nuevo proyecto',
+    //   completed: false,
+    // },
+    // {
+    //   id: Date.now() + 2,
+    //   title: 'Crear componentes',
+    //   completed: false,
+    // },
     // 'Instalar Angular CLI',
     // 'Crear nuevo proyecto',
     // 'Crear componentes',
@@ -72,6 +72,38 @@ export class HomeComponent {
 
   //   this.addTask(newTask);
   // }
+
+  injector = inject(Injector);
+
+  // los signal, computed y effect son los que conforman el mundo de la reactividad en angular/core
+  // para usar un effect se debe poner en el constructor de la clase y se debe importar de @angular/core
+  constructor() {
+    // el effect se encarga de hacer traking de los cambios de un estado y respecto a eso ejecutar una función, parecido al computed pero este no retorna un estado a partir de otros estados, sino que ejecuta una función cuando un estado cambia
+    // effect(() => {
+    //   // esto se ejecuta con el estado inicial, es decir, cuando se carga la página y se crea un array vacio
+    //   const tasks = this.tasks();
+    //   console.log('run effect');
+    //   localStorage.setItem('tasks', JSON.stringify(tasks));
+    // }); // como en teoria se ejecuta antes del ngOnInit, se envia el efect a otro lugar diferente del contructor, pero hay que tener un inyector de dependencias para poder usarlo
+  }
+
+  ngOnInit() {
+    const tasks = localStorage.getItem('tasks');
+
+    if (tasks) {
+      this.tasks.set(JSON.parse(tasks));
+    }
+
+    this.trackTasks();
+  }
+
+  trackTasks() {
+    effect(() => {
+      const tasks = this.tasks();
+      console.log('run effect');
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, {injector: this.injector});
+  }
 
   changeHandler(event: Event) {
     if (this.newTaskCtrl.valid && this.newTaskCtrl.value.trim() !== '') {
