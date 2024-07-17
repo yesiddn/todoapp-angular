@@ -185,3 +185,72 @@ export class LabsComponent implements OnDestroy {
   name = signal('Daniel');
 }
 ```
+
+## Build
+
+Para hacer un build de la aplicación, ejecutar el siguiente comando:
+
+```bash
+ng build
+```
+
+Pero con el proyecto como esta no generará un error:
+
+```bash
+Application bundle generation failed. [8.670 seconds]
+
+▲ [WARNING] src/app/pages/home/home.component.css exceeded maximum budget. Budget 2.05 kB was not met by 2.93 kB with a total of 4.98 kB.
+
+
+✘ [ERROR] src/app/pages/home/home.component.css exceeded maximum budget. Budget 4.10 kB was not met by 880 bytes with a total of 4.98 kB.
+```
+
+Esto se debe a las nuevas practicas de Angular, que ahora tiene un limite de tamaño para los archivos CSS, JS, etc.
+Por ahora se omitira está practica ya que para solucionar esto se crean componentes mas pequeños y eso se verá más adelante.
+
+Tambiés en el archivo `angular.json` se puede modificar el tamaño de los archivos permitidos, que es lo que se hará en este caso. En `"type": "anyComponentStyle"` se puede modificar el tamaño permitido en la propiedad `maximumWarning` y `maximumError`.
+
+```json
+"production": {
+  "budgets": [
+    {
+      "type": "initial",
+      "maximumWarning": "500kB",
+      "maximumError": "1MB"
+    },
+    {
+      "type": "anyComponentStyle",
+      "maximumWarning": "2kB",
+      "maximumError": "6kB" <--- Modificar estos valores
+    }
+  ],
+  "outputHashing": "all"
+},
+```
+
+> ❌ Esta es una mala practica, pero como estamos haciendo de forma consciente se puede hacer.
+
+### Fix build directory
+
+Si al hacer build de la aplicación se genero una carpeta `browser`, es decir `dist/todoapp/browser/` se puede hacer otra configuración en el archivo `angular.json` para que se genere en la carpeta `dist/todoapp/`.
+
+- Paso 1:
+Archivo de configuración `angular.json` cambiar la linea `"architect.build.builder"`:
+
+```json
+"builder": "@angular-devkit/build-angular:application",
+```
+
+Por la siguiente linea:
+
+```json
+"builder": "@angular-devkit/build-angular:browser",
+```
+
+Si se dan cuenta el objetivo es cambiar `:application` por `:browser`.
+
+- Paso 2:
+Cambiar de nombre la propiedad `"architect.builder.options.browser"` por `"architect.builder.options.main"` Dejare la comparativa: La linea verde es como debe quedar.
+![Comparativa](https://static.platzi.com/media/user_upload/image-1f86dc4b-5e9a-446c-abb7-da147429764d.jpg)
+
+> 💡Pd: la propiedad deleteOutputPath es opcional.
